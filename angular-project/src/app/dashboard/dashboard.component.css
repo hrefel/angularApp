@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.toolbar-is-mobile .toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+h1.app-name {
+  margin-left: 8px;
+  color: white;
+}
+
+.sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+.is-mobile .sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
+}
+
+div .menu-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+button.ant-btn {
+  width: 100%;
+  /* opacity: inherit; */
+  background-color: #001529;
+  border-radius: 0px;
+  color: #fff;
+  border-color: #001529;
+}
+
+mat-toolbar, button.mat-icon {
+  background-color: #001529;
+  color: white
+}
+
+mat-sidenav-content {
+  padding: 30px;
+  background: #ECE9E6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #e2e2e2, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #e2e2e2, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+}
+
+mat-toolbar {
+  /* background: #00467F; */
+  /* fallback for old browsers */
+  /* background: -webkit-linear-gradient(to right, #001529, #A5CC82); */
+  /* Chrome 10-25, Safari 5.1-6 */
+  /* background: linear-gradient(100deg, #001529, #004c97); */
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #03001e;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(30deg, #001529, #330155, #531442, #413e40);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+mat-sidenav.mat-drawer {
+  /* background-color: rgba(0, 0, 0, 0.159); */
+  background-color: #001529;
+}

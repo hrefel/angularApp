@@ -1,0 +1,45 @@
+<div class="container" [class.toolbar-is-mobile]="mobileQuery.matches">
+	<mat-toolbar class="toolbar mat-elevation-z1">
+		<button mat-icon-button (click)="snav.toggle()">
+			<mat-icon>menu</mat-icon>
+		</button>
+		<h1 class="app-name">{{title}}</h1>
+	</mat-toolbar>
+	<mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+		<mat-sidenav #snav [mode]="'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" opened>
+			<mat-nav-list>
+				<div>
+					<div class="menu-side">
+						<button nz-button (click)="toggleCollapsed();" style="margin-bottom: 10px;">
+							<i class="anticon" [class.anticon-right]="isCollapsed" [class.anticon-left]="!isCollapsed">
+							</i>
+						</button>
+					</div>
+					<ul nz-menu nzTheme='dark' [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+						<li nz-menu-item *ngFor="let item of singleMenuItem">
+							<span title routerLink="{{item.actionLink}}">
+								<i nz-icon type="{{item.icon}}" theme="outline"></i>
+								<!-- <i class="{{item.icon}}"></i> -->
+								<span>{{item.title}}</span>
+							</span>
+						</li>
+						<li nz-submenu *ngFor="let menu of subMenuItem">
+							<span title>
+								<i nz-icon type="{{menu.icon}}" theme="outline"></i>
+								<span>{{menu.title}}</span>
+							</span>
+							<ul *ngFor="let subMenu of menu.subMenuTitle">
+								<li nz-menu-item>
+									<a routerLink="{{subMenu.actionLink}}">{{subMenu.tit}}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</mat-nav-list>
+		</mat-sidenav>
+		<mat-sidenav-content>
+			<router-outlet></router-outlet>
+		</mat-sidenav-content>
+	</mat-sidenav-container>
+</div>

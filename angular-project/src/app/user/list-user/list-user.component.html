@@ -1,0 +1,25 @@
+<nz-table #DataSource [nzData]="dataSource" class="mat-elevation-z4">
+    <thead>
+        <tr>
+            <th *ngFor="let col of cols">{{col.colTitle}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of DataSource.data">
+            <td>{{data.nama}}</td>
+            <td>{{data.gender}}</td>
+            <td>{{data.address}}</td>
+            <td>{{data.bornDate}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.notelp}}</td>
+            <td>{{data.username}}</td>
+            
+            <!-- <td>{{data.password}}</td> -->
+            <td>
+                <a nz-button nzType="danger" (click)="deleteUser(data._id)">Delete</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a nz-button nzType="primary">Update</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
