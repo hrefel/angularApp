@@ -1,25 +1,28 @@
-let createError = require('http-errors')
-let mongoose = require('mongoose')
-let express = require('express')
-let path = require('path')
-let cookieParser = require('cookie-parser')
-let logger = require('morgan')
-let bodyParser = require('body-parser')
+let createError = require('http-errors');
+let mongoose = require('mongoose');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+let bodyParser = require('body-parser');
+let passport = require('passport');
 
 // defined router model
-let indexRouter = require('./routes/index')
-let usersRouter = require('./routes/users')
-let guruRouter = require('./routes/guru')
-let userRouter = require('./routes/user')
-let jenisBarang = require('./routes/jenisBarang')
-let barang = require('./routes/barang')
-let detailBarang = require('./routes/detailBarang')
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
+let guruRouter = require('./routes/guru');
+let userRouter = require('./routes/user');
+let jenisBarang = require('./routes/jenisBarang');
+let barang = require('./routes/barang');
+let detailBarang = require('./routes/detailBarang');
 
-let app = express()
-let server = require('http').Server(app)
-let io = require('socket.io')(server)
+let app = express();
+let server = require('http').Server(app);
+let io = require('socket.io')(server);
+let config = require('./config/config');
 
 mongoose.Promise = global.Promise
+
 // view engine setup
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(function (req, res, next) {
@@ -31,7 +34,7 @@ app.use(function (req, res, next) {
 })
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
-// app.use(cors({ origin: 'http://localhost:4200', methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'}))
+
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -47,28 +50,29 @@ app.use('/jenis-barang', jenisBarang)
 app.use('/barang', barang)
 app.use('/detail-barang', detailBarang)
 
-// konek ke mongoDB
-mongoose.connect('mongodb://localhost:27017/getting-stared-nodejs', { useNewUrlParser: true }).then(() => console.log('MongoDB has Been Connected'))
+// Connect to mongoDB
+mongoose.connect(config.database, { useNewUrlParser: true }).then(() => console.log('MongoDB has Been Connected'))
   .catch((err) => console.error(err)
-)
+);
+// On Connection
+mongoose.connection.on('connected', ()=>{
+  console.log('Connected to database ' + config.database);
+});
+mongoose.connection.on('error', (err)=> {
+  console.log('Database error' + err);
+});
+
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404))
-})
+});
 
+// passport
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
 // event handler socket.io 
-io.on('connection', function (socket) {
-  socket.on('user', function (data) {
-    console.log('client mengirim pesan => ' + data)
-  })
-  socket.on('jumlah', function (data) {
-    var hasil = data.a + data.b
-    socket.emit('hasil = ' + hasil)
-  })
-  socket.on('disconnect', function () {
-    console.log('Client Disconnected')
-  })
-})
 
 // error handler
 app.use(function (err, req, res, next) {
