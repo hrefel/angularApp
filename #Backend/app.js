@@ -70,7 +70,7 @@ app.use(function (req, res, next) {
 
 // passport
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 require('./config/passport')(passport);
 // event handler socket.io 
 
