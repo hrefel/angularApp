@@ -3,14 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { UserComponent } from '../user/user.component';
+import { RegisterComponent } from '../register/register.component';
+import { LoginComponent } from '../login/login.component';
 
 export const routes: Routes = [
-  // {path:'',component:HomeComponent},
-  // {path:'master-gender', component:GenderComponent},
-  // {path:'login', component:LoginComponent},
-  // {path:'register', component:RegisterComponent},
-  { path:'master-user', component: UserComponent}
-  // {path:'**', redirectTo:''}
+  { path: 'master-user', component: UserComponent},
+  { path: 'register-user', component: RegisterComponent},
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({

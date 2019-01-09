@@ -6,15 +6,13 @@
     </thead>
     <tbody>
         <tr *ngFor="let data of DataSource.data">
-            <td>{{data.nama}}</td>
+            <td>{{data.name}}</td>
             <td>{{data.gender}}</td>
             <td>{{data.address}}</td>
             <td>{{data.bornDate}}</td>
             <td>{{data.email}}</td>
             <td>{{data.notelp}}</td>
             <td>{{data.username}}</td>
-            
-            <!-- <td>{{data.password}}</td> -->
             <td>
                 <a nz-button nzType="danger" (click)="deleteUser(data._id)">Delete</a>
                 <nz-divider nzType="vertical"></nz-divider>

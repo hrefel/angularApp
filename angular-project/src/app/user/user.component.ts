@@ -29,8 +29,8 @@ export class UserComponent implements OnInit {
 		this.cols = [
 			{ colTitle: 'Nama' },
 			{ colTitle: 'Gender' },
-			{ colTitle: 'Address' },
-			{ colTitle: 'Born Date' },
+			// { colTitle: 'Address' },
+			// { colTitle: 'Born Date' },
 			{ colTitle: 'Email' },
 			{ colTitle: 'Nomor Telp' },
 			{ colTitle: 'Username' },

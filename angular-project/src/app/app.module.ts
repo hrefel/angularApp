@@ -19,9 +19,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { UserSvcService } from './user/services/user-svc.service';
+import { AuthService } from './public/auth/auth.service'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '../../node_modules/@angular/http';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 const ioConfig: SocketIoConfig = { url: 'http://localhost:4200', options: {} }
 
@@ -32,11 +35,13 @@ registerLocaleData(en);
     ListUserComponent,
     DashboardComponent,
     UserComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     BrowserModule,
-    FormsModule, ReactiveFormsModule, SocketIoModule.forRoot(ioConfig)
+    FormsModule, ReactiveFormsModule, SocketIoModule.forRoot(ioConfig),
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     //imports angular material
@@ -51,7 +56,7 @@ registerLocaleData(en);
     HttpModule,
     NgZorroAntdModule
   ],
-  providers: [ UserSvcService,
+  providers: [ UserSvcService, AuthService,
     {
       provide: NZ_I18N, useValue: en_US
     }
